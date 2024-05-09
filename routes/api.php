@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,7 @@ use App\Http\Controllers\LoginController;
 */
 
 Route::post('login', [LoginController::class, 'login']);
+
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::resource('tasks', TaskController::class);
+});
