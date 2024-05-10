@@ -94,7 +94,7 @@ class TaskAssignmentController extends Controller
 
         $userId = $request->user_id;
         if (!$task->users()->where('user_id', $userId)->exists()) {
-            return response()->json(['success' => false, 'message' => 'Task is not assigned to this user'], 403);
+            return Response(['success' => false, 'message' => 'Task is not assigned to this user'], 403);
         }
 
         $updatedStatus = $task->users()->updateExistingPivot($userId, ['status' => $request->status]);

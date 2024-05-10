@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskAssignmentController;
+use App\Http\Controllers\UserTasksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,11 +24,10 @@ Route::post('login', [LoginController::class, 'login']);
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::resource('tasks', TaskController::class);
 
-    // Route::post('/task/assign/{taskId}', [TaskAssignmentController::class, 'assignUser']);
+    Route::post('/task/assign/{taskId}', [TaskAssignmentController::class, 'assignUser']);
     Route::delete('/task/unassign/{taskId}', [TaskAssignmentController::class, 'unassignUser']);
-    // Route::put('/tasks/status/{taskId}', [TaskAssignmentController::class, 'updateStatus']);
-});
+    Route::put('/tasks/status/{taskId}', [TaskAssignmentController::class, 'updateStatus']);
 
-Route::post('/task/assign/{taskId}', [TaskAssignmentController::class, 'assignUser']);
-Route::delete('/task/unassign/{taskId}', [TaskAssignmentController::class, 'unassignUser']);
-Route::put('/tasks/status/{taskId}', [TaskAssignmentController::class, 'updateStatus']);
+    Route::get('/user/{userId}/tasks', [UserTasksController::class, 'UserTasks']);
+    Route::get('/user/tasks', [UserTasksController::class, 'loggedUserTasks']);
+});
