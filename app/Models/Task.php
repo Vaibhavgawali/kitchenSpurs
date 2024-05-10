@@ -16,4 +16,9 @@ class Task extends Model
     protected $casts = [
         'due_date' => 'date:Y-m-d', // Format due_date as 'Y-m-d'
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'task_user')->withTimestamps();
+    }
 }
