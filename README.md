@@ -84,10 +84,6 @@ email : vaibhav@example.com
 password : password
 ```
 
-### Postman API Link
-
-You can find the Postman API collection [here](https://api.postman.com/collections/34860756-e4c35097-9157-4144-9e19-82ff66322ad1?access_key=PMAT-01HXM3DWYPZJ5KKPBSMBFPFFG5).
-
 ## Authentication
 
 To authenticate requests, include a bearer token in the header:
