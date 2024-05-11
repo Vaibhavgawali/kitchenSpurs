@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Faker\Factory as Faker;
+use Illuminate\Support\Str;
+
 use App\Models\User;
 
 class UserSeeder extends Seeder
@@ -15,12 +15,33 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Faker::create('en_IN'); // Indian English locale
+        $names = [
+            'John Doe',
+            'Jane Smith',
+            'Michael Johnson',
+            'Emily Brown',
+            'David Lee',
+            'Sarah Wilson',
+            'Robert Taylor',
+            'Olivia Martinez',
+            'James Anderson',
+            'Emma Thomas',
+            'William Garcia',
+            'Sophia Hernandez',
+            'Matthew Young',
+            'Isabella Lopez',
+            'Daniel Scott',
+            'Mia King',
+            'Christopher Hall',
+            'Ava Allen',
+            'Joseph Green',
+            'Ella Adams'
+        ];
 
-        foreach (range(1, 20) as $index) {
+        foreach ($names as $name) {
             User::create([
-                'name' => $faker->name,
-                'email' => $faker->unique()->safeEmail,
+                'name' => $name,
+                'email' => Str::slug($name) . '@example.com',
                 'password' => Hash::make('password'),
             ]);
         }

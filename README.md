@@ -1,66 +1,187 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# kitchenSpurs
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Task Management Application API
 
-## About Laravel
+## Requirements
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   Laravel 10.x (PHP 8.2)
+-   NodeJS > 14
+-   Composer
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## How to install
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Clone Repository
 
-## Learning Laravel
+open your terminal, go to the directory that you will install this project, then run the following command:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```bash
+git clone https://github.com/Vaibhavgawali/kitchenSpurs.git
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+cd kitchenSpurs
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Install packages
 
-## Laravel Sponsors
+Install vendor using composer
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```bash
+composer install
+```
 
-### Premium Partners
+### Configure .env
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Copy .env.example file
 
-## Contributing
+```bash
+cp .env.example .env
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Add mysql database name in .env file
 
-## Code of Conduct
+```bash
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=KitchenSpurs
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Then run the following command :
 
-## Security Vulnerabilities
+```php
+php artisan key:generate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Migrate Data
 
-## License
+Run the following command to generate all tables :
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```php
+php artisan migrate
+```
+
+Run the following command to seed dummy data of Users:
+
+```php
+php artisan db:seed --class=UserSeeder
+```
+
+### Running Application
+
+To serve the laravel app, you need to run the following command in the project director (This will serve your app, and give you an adress with port number 8000 or etc)
+
+-   **Note: You need run the following command into new terminal tab**
+
+```php
+php artisan serve
+```
+
+### User Login Details
+
+```php
+email : vaibhav@example.com
+password : password
+```
+
+### Postman API Link
+
+You can find the Postman API collection [here](https://api.postman.com/collections/34860756-e4c35097-9157-4144-9e19-82ff66322ad1?access_key=PMAT-01HXM3DWYPZJ5KKPBSMBFPFFG5).
+
+## Authentication
+
+To authenticate requests, include a bearer token in the header:
+
+```php
+Authorization: Bearer <your_token_here>
+```
+
+## Base URL
+
+```php
+http://127.0.0.1:8000/api
+```
+
+## Endpoints
+
+## Login
+
+### Description
+
+Logs in a user and returns a bearer token if the provided credentials are correct.
+
+### Login Request
+
+-   **URL:** `/login`
+-   **Method:** `POST`
+-   **Headers:**
+    -   `Content-Type: application/json`
+-   **Body:**
+    ```json
+    {
+        "email": "vaibhav@example.com",
+        "password": "password"
+    }
+    ```
+
+### 1. Get Tasks
+
+-   **URL:** `/tasks`
+-   **Method:** `GET`
+-   **Description:** Retrieve all tasks.
+-   **Parameters:**
+    -   None
+-   **Request Headers:**
+    -   `Authorization: Bearer <your_token_here>`
+-   **Response:**
+
+    -   Status: 200 OK
+    -   Body:
+
+        ```json
+        {
+            "tasks": [
+                {
+                    "id": 1,
+                    "title": "Task 1",
+                    "description": "Description of Task 1",
+                    "due_date": "2024-05-13",
+                    "status": "pending",
+                    "created_at": "2024-05-08T18:33:05.000000Z",
+                    "updated_at": "2024-05-08T18:33:05.000000Z"
+                },
+                {
+                    "id": 2,
+                    "title": "Task 2",
+                    "description": "Description of Task 2",
+                    "due_date": "2024-05-13",
+                    "status": "pending",
+                    "created_at": "2024-05-08T18:33:05.000000Z",
+                    "updated_at": "2024-05-08T18:33:05.000000Z"
+                }
+            ]
+        }
+        ```
+
+### 2. Create Task
+
+-   **URL:** `/tasks`
+-   **Method:** `POST`
+-   **Description:** Create a new task.
+-   **Parameters:**
+    -   `title` (string, required): Title of the task.
+    -   `description` (string, optional): Description of the task.
+    -   `due_date` (string, optional): Due date of the task in YYYY-MM-DD format.
+    -   `status` (string, optional): Status of the task. Can be one of "pending", "in progress", or "completed"..
+-   **Request Headers:**
+    -   `Authorization: Bearer <your_token_here>`
+-   **Request Body:**
+    ```json
+    {
+        "title": "New Task",
+        "description": "Description of the new task",
+        "status": "in progress",
+        "created_at": "2024-05-08T18:33:05.000000Z",
+        "updated_at": "2024-05-08T18:33:05.000000Z"
+    }
+    ```

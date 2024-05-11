@@ -140,7 +140,7 @@ class TaskController extends Controller
      */
     public function destroy(string $id)
     {
-        $task = Task::find($id)->first();
+        $task = Task::find($id);
         if ($task) {
             $isDeleted = $task->delete();
             if ($isDeleted) {

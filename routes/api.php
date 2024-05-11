@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::post('/task/assign/{taskId}', [TaskAssignmentController::class, 'assignUser']);
     Route::delete('/task/unassign/{taskId}', [TaskAssignmentController::class, 'unassignUser']);
-    Route::put('/tasks/status/{taskId}', [TaskAssignmentController::class, 'updateStatus']);
+    Route::put('/task/status/{taskId}', [TaskAssignmentController::class, 'updateStatus']);
 
     Route::get('/user/{userId}/tasks', [UserTasksController::class, 'UserTasks']);
     Route::get('/user/tasks', [UserTasksController::class, 'loggedUserTasks']);
