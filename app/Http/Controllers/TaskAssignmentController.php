@@ -97,7 +97,7 @@ class TaskAssignmentController extends Controller
             return Response(['success' => false, 'message' => 'Task is not assigned to this user'], 403);
         }
 
-        $updatedStatus = $task->users()->updateExistingPivot($userId, ['status' => $request->status]);
+        $updatedStatus = $task->users()->updateExistingPivot($userId, ['status' => $request->status, 'updated_at' => now()]);
         if (!$updatedStatus) {
             return Response(['success' => true, 'message' => 'Failed to unassign user from the task'], 500);
         }

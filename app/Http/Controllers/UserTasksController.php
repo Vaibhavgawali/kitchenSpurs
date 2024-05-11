@@ -17,12 +17,17 @@ class UserTasksController extends Controller
         }
 
         $tasks = $user->tasks()->withPivot('status')->get()->map(function ($task) {
+            $task->pivot->updated_at = now();
+            $task->pivot->save();
+
             return [
                 'id' => $task->id,
                 'title' => $task->title,
                 'description' => $task->description,
                 'due_date' => $task->due_date,
-                'status' => $task->pivot->status
+                'status' => $task->pivot->status,
+                'created_at' => $task->pivot->created_at,
+                'updated_at' => $task->pivot->updated_at
             ];
         });
         if ($tasks->isEmpty()) {
@@ -38,12 +43,17 @@ class UserTasksController extends Controller
         $user = User::find($userId);
 
         $tasks = $user->tasks()->withPivot('status')->get()->map(function ($task) {
+            $task->pivot->updated_at = now();
+            $task->pivot->save();
+
             return [
                 'id' => $task->id,
                 'title' => $task->title,
                 'description' => $task->description,
                 'due_date' => $task->due_date,
-                'status' => $task->pivot->status
+                'status' => $task->pivot->status,
+                'created_at' => $task->pivot->created_at,
+                'updated_at' => $task->pivot->updated_at
             ];
         });
 

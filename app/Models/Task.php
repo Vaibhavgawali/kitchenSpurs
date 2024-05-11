@@ -14,7 +14,7 @@ class Task extends Model
     protected $dates = ['due_date'];
 
     protected $casts = [
-        'due_date' => 'date:Y-m-d', // Format due_date as 'Y-m-d'
+        'due_date' => 'date:Y-m-d',
     ];
 
     public function users()

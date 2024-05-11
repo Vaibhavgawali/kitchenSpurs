@@ -127,6 +127,7 @@ class TaskController extends Controller
             $isUpdated = $task->update($request->all());
 
             if ($isUpdated) {
+                $task->touch();
                 return Response(['success' => true, 'message' => "Task updated successfully"], 200);
             }
             return Response(['success' => false, 'message' => "Failed to update task"], 500);
