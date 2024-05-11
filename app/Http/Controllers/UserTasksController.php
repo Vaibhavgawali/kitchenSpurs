@@ -16,7 +16,15 @@ class UserTasksController extends Controller
             return response()->json(['message' => 'User not found'], 404);
         }
 
-        $tasks = $user->tasks()->withPivot('status')->get();
+        $tasks = $user->tasks()->withPivot('status')->get()->map(function ($task) {
+            return [
+                'id' => $task->id,
+                'title' => $task->title,
+                'description' => $task->description,
+                'due_date' => $task->due_date,
+                'status' => $task->pivot->status
+            ];
+        });
         if ($tasks->isEmpty()) {
             return Response(['success' => true, 'message' => 'User do not assigned any tasks'], 200);
         }
@@ -29,7 +37,15 @@ class UserTasksController extends Controller
         $userId = auth()->user()->id;
         $user = User::find($userId);
 
-        $tasks = $user->tasks()->withPivot('status')->get();
+        $tasks = $user->tasks()->withPivot('status')->get()->map(function ($task) {
+            return [
+                'id' => $task->id,
+                'title' => $task->title,
+                'description' => $task->description,
+                'due_date' => $task->due_date,
+                'status' => $task->pivot->status
+            ];
+        });
 
         if ($tasks->isEmpty()) {
             return response()->json(['message' => 'You have no tasks assigned'], 200);
